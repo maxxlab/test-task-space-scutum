@@ -25,3 +25,11 @@ extension ConvertCategory on String {
     }
   }
 }
+
+final List<String> categoryList = <String>[
+  CategoryEnum.common.category,
+  CategoryEnum.shopping.category,
+  CategoryEnum.sport.category,
+  CategoryEnum.work.category,
+  CategoryEnum.studying.category,
+];

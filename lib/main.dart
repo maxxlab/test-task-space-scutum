@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:space_scutum_test/features/bottom_navigation/presentation/bottom_navigation_bar.dart';
-import 'package:space_scutum_test/features/task_list/presentation/providers/bloc/task_list_bloc.dart';
+import 'package:space_scutum_test/features/task_list/presentation/providers/category_bloc/category_bloc.dart';
+import 'package:space_scutum_test/features/task_list/presentation/providers/task_list_bloc/task_list_bloc.dart';
 import 'package:space_scutum_test/theme/color_schemes.g.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(
-    BlocProvider<TaskListBloc>(
-      create: (context) => TaskListBloc()..add(LoadTasks()),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<TaskListBloc>(
+          create: (context) => TaskListBloc()..add(LoadTasks()),
+        ),
+        BlocProvider<CategoryBloc>(
+          create: (context) => CategoryBloc(),
+        )
+      ],
       child: const MyApp(),
     ),
   );

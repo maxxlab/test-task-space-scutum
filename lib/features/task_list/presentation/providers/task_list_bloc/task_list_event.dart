@@ -41,3 +41,16 @@ class ToggleTaskCompletion extends TaskListEvent {
   @override
   List<Object> get props => [id];
 }
+
+class FilterTaskList extends TaskListEvent {
+  final bool? completed;
+  final CategoryEnum? categoryEnum;
+
+  const FilterTaskList({
+    this.completed,
+    this.categoryEnum,
+  });
+
+  // @override
+  // List<Object> get props => [];
+}

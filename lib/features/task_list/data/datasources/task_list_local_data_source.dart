@@ -1,10 +1,12 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:space_scutum_test/core/params/params.dart';
 import '../models/task_model.dart';
 
 abstract class TaskListLocalDataSource {
   Future<List<TaskModel>> loadTasks();
   Future<void> saveTasks({required List<TaskModel> tasks});
+  Future<List<TaskModel>> filterTasks(
+      {required TasksFilterParams tasksFilterParams});
 }
 
 class TaskListLocalDataSourceImpl implements TaskListLocalDataSource {
@@ -16,6 +18,7 @@ class TaskListLocalDataSourceImpl implements TaskListLocalDataSource {
   @override
   Future<List<TaskModel>> loadTasks() async {
     final prefs = _sharedPreferences;
+    // await prefs.clear();
     final encodedTasks = prefs.getStringList('tasks');
     if (encodedTasks == null) return [];
     return encodedTasks.map((json) => TaskModel.fromJson(json)).toList();
@@ -26,5 +29,22 @@ class TaskListLocalDataSourceImpl implements TaskListLocalDataSource {
     final prefs = _sharedPreferences;
     final encodedTasks = tasks.map((task) => task.toJson()).toList();
     await prefs.setStringList('tasks', encodedTasks);
+  }
+
+  @override
+  Future<List<TaskModel>> filterTasks(
+      {required TasksFilterParams tasksFilterParams}) async {
+        final loadedTasks = await loadTasks();
+    if (tasksFilterParams.completed != null) {
+      return loadedTasks
+          .where((task) => task.completed == tasksFilterParams.completed)
+          .toList();
+    } else if (tasksFilterParams.categoryEnum != null) {
+      return loadedTasks
+          .where((task) => task.categoryEnum == tasksFilterParams.categoryEnum)
+          .toList();
+    } else {
+      return loadedTasks;
+    }
   }
 }

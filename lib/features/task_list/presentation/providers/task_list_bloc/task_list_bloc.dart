@@ -2,10 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:space_scutum_test/core/constants/category_enum.dart';
+import 'package:space_scutum_test/core/params/params.dart';
 import 'package:space_scutum_test/features/task_list/business/entities/task_entity.dart';
+import 'package:space_scutum_test/features/task_list/business/usecases/filter_tasks.dart';
 import 'package:space_scutum_test/features/task_list/business/usecases/load_tasks.dart';
 import 'package:space_scutum_test/features/task_list/business/usecases/save_tasks.dart';
 import 'package:space_scutum_test/features/task_list/data/datasources/task_list_local_data_source.dart';
+import 'package:space_scutum_test/features/task_list/data/models/task_model.dart';
 import 'package:space_scutum_test/features/task_list/data/repositories/task_list_repository_impl.dart';
 import 'package:uuid/uuid.dart';
 
@@ -34,16 +37,36 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
       },
     );
 
+    on<FilterTaskList>(
+      (event, emit) async {
+        try {
+          final filteredTasks = await FilterTasksUseCase(
+            taskListRepository: TaskListRepositoryImpl(
+              localDataSource: TaskListLocalDataSourceImpl(
+                sharedPreferences: await SharedPreferences.getInstance(),
+              ),
+            ),
+          ).call(
+            tasksFilterParams: TasksFilterParams(
+                completed: event.completed, categoryEnum: event.categoryEnum),
+          );
+
+          emit(FilteredTaskList(filteredTaskList: filteredTasks));
+        } catch (error) {
+          emit(TaskListError(error: error.toString()));
+        }
+      },
+    );
+
     on<AddTask>(
       (event, emit) async {
         try {
           final newTask = TaskEntity(
-            id: const Uuid().v4(),
-            title: event.title,
-            description: event.description,
-            completed: false,
-            categoryEnum: event.categoryEnum
-          );
+              id: const Uuid().v4(),
+              title: event.title,
+              description: event.description,
+              completed: false,
+              categoryEnum: event.categoryEnum);
 
           final taskListRepository = TaskListRepositoryImpl(
             localDataSource: TaskListLocalDataSourceImpl(
@@ -75,7 +98,7 @@ class TaskListBloc extends Bloc<TaskListEvent, TaskListState> {
         }
       },
     );
- 
+
     on<RemoveTask>(
       (event, emit) async {
         final taskList = (state as TaskListLoaded)

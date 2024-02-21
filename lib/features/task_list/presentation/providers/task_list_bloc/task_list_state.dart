@@ -18,6 +18,16 @@ final class TaskListLoaded extends TaskListState {
   List<Object> get props => [taskList];
 }
 
+final class FilteredTaskList extends TaskListState {
+  
+  final List<TaskEntity> filteredTaskList;
+  const FilteredTaskList(
+      {required this.filteredTaskList});
+
+  @override
+  List<Object> get props => [filteredTaskList];
+}
+
 class TaskListError extends TaskListState {
   final String error;
 

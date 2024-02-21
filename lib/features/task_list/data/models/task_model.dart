@@ -47,7 +47,7 @@ class TaskModel extends TaskEntity {
       'title': title,
       'description': description,
       'completed': completed,
-      'categoryEnum': categoryEnum,
+      'categoryEnum': categoryEnum.category,
     };
   }
 
@@ -57,7 +57,7 @@ class TaskModel extends TaskEntity {
       title: map['title'] as String,
       description: map['description'] as String,
       completed: map['completed'] as bool,
-      categoryEnum: map['categoryEnum'] as CategoryEnum,
+      categoryEnum: (map['categoryEnum'] as String).toCategoryEnum(),
     );
   }
 

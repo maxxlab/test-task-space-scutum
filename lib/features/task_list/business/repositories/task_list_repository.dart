@@ -4,8 +4,9 @@ import '../../../../../core/errors/failure.dart';
 import '../../../../../core/params/params.dart';
 import '../entities/task_entity.dart';
 
-
 abstract class TaskListRepository {
   Future<List<TaskEntity>> loadTasks();
   Future<void> saveTasks({required List<TaskModel> tasks});
+  Future<List<TaskEntity>> filterTasks(
+      {required TasksFilterParams tasksFilterParams});
 }
