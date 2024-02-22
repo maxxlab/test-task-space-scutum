@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_scutum_test/core/constants/category_enum.dart';
-import 'package:space_scutum_test/features/task_list/business/entities/task_entity.dart';
 import 'package:space_scutum_test/features/task_list/presentation/providers/task_list_bloc/task_list_bloc.dart';
 
 class FilterButton extends StatelessWidget {
@@ -16,7 +15,7 @@ class FilterButton extends StatelessWidget {
           itemBuilder: (context) {
             return [
               PopupMenuItem<int>(
-                child: const Text("Completed tasks"),
+                child: const Text('Completed tasks'),
                 onTap: () {
                   BlocProvider.of<TaskListBloc>(context).add(
                     const FilterTaskList(
@@ -26,7 +25,7 @@ class FilterButton extends StatelessWidget {
                 },
               ),
               PopupMenuItem<int>(
-                child: const Text("Uncompleted tasks"),
+                child: const Text('Uncompleted tasks'),
                 onTap: () {
                   BlocProvider.of<TaskListBloc>(context).add(
                     const FilterTaskList(
@@ -58,7 +57,7 @@ class FilterButton extends StatelessWidget {
               ),
               if (state is FilteredTaskList)
                 PopupMenuItem<int>(
-                  child: const Text("Clear Filters"),
+                  child: const Text('Clear filters'),
                   onTap: () {
                     BlocProvider.of<TaskListBloc>(context).add(
                       LoadTasks(),

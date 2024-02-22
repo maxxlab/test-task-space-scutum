@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:space_scutum_test/features/task_list/presentation/pages/task_list_page.dart';
+import 'package:space_scutum_test/features/weather/presentation/pages/weather_page.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -10,15 +11,10 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   static const List<Widget> _widgetOptions = <Widget>[
     TaskListPage(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    WeatherPage()
   ];
 
   void _onItemTapped(int index) {
@@ -38,7 +34,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
             label: 'Task List',
-            backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.sunny_snowing),
@@ -47,7 +42,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Theme.of(context).colorScheme.primary,
         onTap: _onItemTapped,
       ),
     );

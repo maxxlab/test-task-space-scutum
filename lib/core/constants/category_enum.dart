@@ -1,7 +1,7 @@
 enum CategoryEnum {
   common('Common'),
   work('Work'),
-  studying('Stydying'),
+  studying('Studying'),
   sport('Sport'),
   shopping('Shopping');
 

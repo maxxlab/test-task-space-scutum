@@ -19,19 +19,3 @@ final class CategoryChosen extends CategoryState {
   List<Object> get props => [categoryEnum];
 }
 
-// class CategoryState {
-//   final CategoryEnum selectedCategory;
-
-//   const CategoryState({required this.selectedCategory});
-
-//   @override
-//   bool operator ==(Object other) =>
-//       identical(this, other) ||
-//       other is CategoryState && selectedCategory == other.selectedCategory;
-
-//   @override
-//   int get hashCode => selectedCategory.hashCode;
-// }
-
-
-

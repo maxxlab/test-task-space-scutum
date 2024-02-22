@@ -5,19 +5,6 @@ import 'package:space_scutum_test/core/constants/category_enum.dart';
 part 'category_event.dart';
 part 'category_state.dart';
 
-// class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-//   CategoryBloc()
-//       : super(CategoryChosen(categoryEnum: CategoryEnum.common)) {
-//     on<SelectCategory>(
-//       (event, emit) {
-//         emit(
-//           CategoryChosen(categoryEnum: event.categoryEnum),
-//         );
-//       },
-//     );
-//   }
-// }
-
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc() : super(CategoryInitial()) {
     on<SelectCategory>(

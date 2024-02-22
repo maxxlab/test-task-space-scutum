@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:space_scutum_test/core/constants/string_constants.dart';
 import 'package:space_scutum_test/core/params/params.dart';
 import '../models/task_model.dart';
 
@@ -19,7 +20,7 @@ class TaskListLocalDataSourceImpl implements TaskListLocalDataSource {
   Future<List<TaskModel>> loadTasks() async {
     final prefs = _sharedPreferences;
     // await prefs.clear();
-    final encodedTasks = prefs.getStringList('tasks');
+    final encodedTasks = prefs.getStringList(kTasks);
     if (encodedTasks == null) return [];
     return encodedTasks.map((json) => TaskModel.fromJson(json)).toList();
   }
@@ -28,7 +29,7 @@ class TaskListLocalDataSourceImpl implements TaskListLocalDataSource {
   Future<void> saveTasks({required List<TaskModel> tasks}) async {
     final prefs = _sharedPreferences;
     final encodedTasks = tasks.map((task) => task.toJson()).toList();
-    await prefs.setStringList('tasks', encodedTasks);
+    await prefs.setStringList(kTasks, encodedTasks);
   }
 
   @override

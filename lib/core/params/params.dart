@@ -25,3 +25,11 @@ class TasksFilterParams {
     this.completed,
   });
 }
+
+class WeatherForecastParams {
+  final String cityName;
+
+  WeatherForecastParams({
+    required this.cityName,
+  });
+}

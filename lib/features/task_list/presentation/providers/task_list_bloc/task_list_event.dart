@@ -50,7 +50,4 @@ class FilterTaskList extends TaskListEvent {
     this.completed,
     this.categoryEnum,
   });
-
-  // @override
-  // List<Object> get props => [];
 }

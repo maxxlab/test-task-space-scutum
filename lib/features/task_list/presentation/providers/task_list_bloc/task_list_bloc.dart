@@ -8,7 +8,6 @@ import 'package:space_scutum_test/features/task_list/business/usecases/filter_ta
 import 'package:space_scutum_test/features/task_list/business/usecases/load_tasks.dart';
 import 'package:space_scutum_test/features/task_list/business/usecases/save_tasks.dart';
 import 'package:space_scutum_test/features/task_list/data/datasources/task_list_local_data_source.dart';
-import 'package:space_scutum_test/features/task_list/data/models/task_model.dart';
 import 'package:space_scutum_test/features/task_list/data/repositories/task_list_repository_impl.dart';
 import 'package:uuid/uuid.dart';
 
